@@ -5,6 +5,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const authRoutes = require('./routes/authRoutes');
+
 // Port and Middlewares
 const PORT = process.env.PORT || process.env.API_PORT;
 
@@ -12,8 +14,19 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Server
+// Register routes
+app.use('/api/auth', authRoutes);
+
 const server = http.createServer(app);
-server.listen(PORT, () => {
-	console.log(`Server is listening on ${PORT}`);
-});
+
+// DB Connection & Server
+mongoose
+	.connect(process.env.MONGO_URI)
+	.then(() => {
+		server.listen(PORT, () => {
+			console.log(`Server is listening on ${PORT}`);
+		});
+	})
+	.catch(err => {
+		console.log('Database connection error. Server not able to start', err);
+	});
