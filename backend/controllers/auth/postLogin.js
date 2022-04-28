@@ -10,7 +10,16 @@ const postLogin = async (req, res) => {
 		const user = await User.findOne({ mail: mail.toLowerCase() });
 		if (user && (await bcrypt.compare(password, user.password))) {
 			// Send new Token
-			const token = 'JWT_TOKEN';
+			const token = jwt.sign(
+				{
+					userId: user._id,
+					mail,
+				},
+				process.env.TOKEN_KEY,
+				{
+					expiresIn: '24h',
+				}
+			);
 
 			return res.status(200).json({
 				userDetails: {
