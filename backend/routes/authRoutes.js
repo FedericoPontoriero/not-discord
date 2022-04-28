@@ -28,7 +28,7 @@ router.post(
 	authControllers.controllers.postLogin
 );
 
-// // test
+// // testing the middleware
 // router.get('/test', auth, (req, res) => {
 // 	res.send('request passed');
 // });
