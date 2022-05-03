@@ -33,3 +33,19 @@ const login = (userDetails, history) => {
 		}
 	};
 };
+
+const register = (userDetails, history) => {
+	return async dispatch => {
+		const response = await api.register(userDetails);
+		console.log(response);
+		if (response.error) {
+			console.log(response.error);
+		} else {
+			const { userDetails } = response?.data;
+			localStorage.setItem('user', JSON.stringify(userDetails));
+
+			dispatch(setUserDetails(userDetails));
+			history.push('/dashboard');
+		}
+	};
+};
