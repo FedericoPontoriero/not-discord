@@ -1,5 +1,9 @@
 import React from 'react';
 import { styled } from '@mui/material';
+import AddFriendButton from './AddFriendButton';
+import FriendsTitle from './FriendsTitle';
+import FriendsList from './FriendsList/FriendsList';
+import PendingInvitationsList from './PendingInvitationsList/PendingInvitationsList';
 
 const MainContainer = styled('div')({
 	width: '224px',
@@ -9,8 +13,17 @@ const MainContainer = styled('div')({
 	alignItems: 'center',
 	backgroundColor: '#2F3136',
 });
+
 function FriendsSideBar() {
-	return <MainContainer></MainContainer>;
+	return (
+		<MainContainer>
+			<AddFriendButton />
+			<FriendsTitle title='Private Messages' />
+			<FriendsList />
+			<FriendsTitle title='Invitations' />
+			<PendingInvitationsList />
+		</MainContainer>
+	);
 }
 
 export default FriendsSideBar;
