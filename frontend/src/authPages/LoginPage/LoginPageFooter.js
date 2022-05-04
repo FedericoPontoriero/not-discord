@@ -20,17 +20,21 @@ function LoginPageFooter({ handleLogin, isFormValid }) {
 
 	return (
 		<>
-			<Tooltip
-				title={!isFormValid ? getFormNotValidMessage() : getFormValidMessage}>
-				<div>
-					<CustomPrimaryButton
-						label='Log in'
-						additionalStyles={{ marginTop: '30px' }}
-						disabled={!isFormValid}
-						onClick={handleLogin}
-					/>
-				</div>
-			</Tooltip>
+			<span>
+				<Tooltip
+					title={
+						!isFormValid ? getFormNotValidMessage() : getFormValidMessage()
+					}>
+					<div>
+						<CustomPrimaryButton
+							label='Log in'
+							additionalStyles={{ marginTop: '30px' }}
+							disabled={!isFormValid}
+							onClick={handleLogin}
+						/>
+					</div>
+				</Tooltip>
+			</span>
 			<RedirectInfo
 				text='Need an acccount? '
 				redirectText='Create an account'

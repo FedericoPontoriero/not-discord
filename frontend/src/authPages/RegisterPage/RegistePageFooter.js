@@ -20,17 +20,21 @@ function RegisterPageFooter({ handleRegister, isFormValid }) {
 
 	return (
 		<>
-			<Tooltip
-				title={!isFormValid ? getFormNotValidMessage() : getFormValidMessage}>
-				<div>
-					<CustomPrimaryButton
-						label='Register'
-						additionalStyles={{ marginTop: '30px' }}
-						disabled={!isFormValid}
-						onClick={handleRegister}
-					/>
-				</div>
-			</Tooltip>
+			<span>
+				<Tooltip
+					title={
+						!isFormValid ? getFormNotValidMessage() : getFormValidMessage()
+					}>
+					<div>
+						<CustomPrimaryButton
+							label='Register'
+							additionalStyles={{ marginTop: '30px' }}
+							disabled={!isFormValid}
+							onClick={handleRegister}
+						/>
+					</div>
+				</Tooltip>
+			</span>
 			<RedirectInfo
 				redirectText='Already have an account? '
 				additionalStyles={{ marginTop: '5px' }}

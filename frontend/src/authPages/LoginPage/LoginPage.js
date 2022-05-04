@@ -24,7 +24,7 @@ function LoginPage({ login }) {
 			password,
 		};
 
-		login({ userDetails, history });
+		login(userDetails, history);
 	};
 	return (
 		<AuthBox>
