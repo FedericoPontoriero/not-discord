@@ -3,7 +3,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { logout } from '../../shared/utils/auth';
+import { logout } from '../../../shared/utils/auth';
 
 export default function BasicMenu() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
