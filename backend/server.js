@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const socketServer = require('./socketServer');
 const authRoutes = require('./routes/authRoutes');
 
 // Port and Middlewares
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 
 const server = http.createServer(app);
+socketServer.registerSocketServer(server);
 
 // DB Connection & Server
 mongoose
