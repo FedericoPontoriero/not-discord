@@ -1,4 +1,4 @@
-import serverStore from '../serverStore';
+const serverStore = require('../serverStore');
 
 const newConnectionHandler = async (socket, io) => {
 	const userDetails = socket.user;

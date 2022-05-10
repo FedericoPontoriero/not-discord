@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 import SideBar from './SideBar/SideBar';
 import FriendsSideBar from './FriendsSideBar/FriendsSideBar';
 import Messenger from './Messenger/Messenger';
-import Appbar from './Appbar/Appbar';
+import AppBar from './Appbar/AppBar';
 import { logout } from '../../shared/utils/auth';
 import { connect } from 'react-redux';
 import { getActions } from '../../store/actions/authActions';
@@ -19,7 +19,7 @@ function Dashboard({ setUserDetails }) {
 		const userDetails = localStorage.getItem('user');
 
 		if (!userDetails) {
-			logout;
+			logout();
 		} else {
 			setUserDetails(JSON.parse(userDetails));
 			connectWithSoketServer(JSON.parse(userDetails));
@@ -30,7 +30,7 @@ function Dashboard({ setUserDetails }) {
 			<SideBar />
 			<FriendsSideBar />
 			<Messenger />
-			<Appbar />
+			<AppBar />
 		</Wrapper>
 	);
 }

@@ -4,9 +4,10 @@ import MenuItem from '@mui/material/MenuItem';
 import { IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { logout } from '../../../shared/utils/auth';
+import { useState } from 'react';
 
 export default function BasicMenu() {
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
 	const handleMenuOpen = event => {

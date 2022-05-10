@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/system';
-
+import PendingInvitationsListItem from './PendingInvitationsListItem';
 const DUMMY_INVITATIONS = [
 	{
 		_id: '1',

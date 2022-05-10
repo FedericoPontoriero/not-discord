@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Typography } from '@mui/material';
-import avatar from '../../../../shared/components/avatar';
+import Avatar from '../../../../shared/components/avatar';
 import OnlineIndicator from './OnlineIndicator';
 
 function FriendsListItem({ id, username, isOnline }) {
@@ -16,7 +16,7 @@ function FriendsListItem({ id, username, isOnline }) {
 				color: 'black',
 				position: 'relative',
 			}}>
-			<avatar username={username} />
+			<Avatar username={username} />
 			<Typography
 				style={{ marginLeft: '7px', fontWeight: 700, color: '#8e9297' }}
 				variant='subtitle1'

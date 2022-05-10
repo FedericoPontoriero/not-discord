@@ -1,7 +1,7 @@
 import { Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import avatar from '../../../../shared/components/avatar';
+import Avatar from '../../../../shared/components/avatar';
 import InvitationDecisionButtons from './InvitationDecisionButtons';
 
 function PendingInvitationsListItem({
@@ -35,7 +35,7 @@ function PendingInvitationsListItem({
 						alignItems: 'center',
 						justifyContent: 'space-between',
 					}}>
-					<avatar username={username} />
+					<Avatar username={username} />
 					<Typography
 						sx={{
 							marginLeft: '7px',

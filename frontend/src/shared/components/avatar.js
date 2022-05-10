@@ -15,7 +15,7 @@ const AvatarPreview = styled('div')({
 	color: 'white',
 });
 
-function avatar({ username, large }) {
+function Avatar({ username, large }) {
 	return (
 		<AvatarPreview style={large ? { height: '80px', width: '80px' } : {}}>
 			{username.substring(0, 2)}
@@ -23,4 +23,4 @@ function avatar({ username, large }) {
 	);
 }
 
-export default avatar;
+export default Avatar;
