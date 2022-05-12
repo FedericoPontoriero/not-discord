@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import { setPendingFriendsInvitations } from '../store/actions/friendsActions';
+import store from '../store/store';
 
 let socket = null;
 
