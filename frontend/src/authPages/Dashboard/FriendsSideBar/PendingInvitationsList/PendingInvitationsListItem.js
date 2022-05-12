@@ -3,6 +3,8 @@ import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import Avatar from '../../../../shared/components/avatar';
 import InvitationDecisionButtons from './InvitationDecisionButtons';
+import { connect } from 'react-redux';
+import { getActions } from '../../../../store/actions/friendsActions';
 
 function PendingInvitationsListItem({
 	id,
@@ -57,4 +59,10 @@ function PendingInvitationsListItem({
 	);
 }
 
-export default PendingInvitationsListItem;
+const mapActionsToProps = dispatch => {
+	return {
+		...getActions(dispatch),
+	};
+};
+
+export default connect(null, mapActionsToProps)(PendingInvitationsListItem);

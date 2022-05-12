@@ -19,6 +19,7 @@ const registerSocketServer = server => {
 
 	io.on('connection', socket => {
 		newConnectionHandler(socket, io);
+
 		socket.on('disconnect', () => {
 			disconnectHandler(socket);
 		});
