@@ -1,5 +1,6 @@
 const FriendInvitation = require('../../models/friendInvitation');
 const user = require('../../models/user');
+const friendsUpdates = require('../../socketHandlers/updates/friends');
 
 const postAccept = async (req, res) => {
 	try {
@@ -29,7 +30,7 @@ const postAccept = async (req, res) => {
 		// Update list of friends if online
 
 		// Update list of pendingInvitations
-		friendsUpdate.updateFriendsPendingInvitations(receiverId.toString());
+		friendsUpdates.updateFriendsPendingInvitations(receiverId.toString());
 		return res.status(200).send('Friend successfully added');
 	} catch (error) {
 		return res.status(500).send('Something went wrong');
