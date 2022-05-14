@@ -33,4 +33,4 @@ const mapStoreStateToProps = ({ friends }) => {
 	};
 };
 
-export default connect(mapStoreToProps)(PendingInvitationsList);
+export default connect(mapStoreStateToProps)(PendingInvitationsList);
