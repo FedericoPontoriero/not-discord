@@ -30,4 +30,9 @@ export const connectWithSoketServer = userDetails => {
 		const { friends } = data;
 		store.dispatch(setFriends(friends));
 	});
+
+	socket.on('online-users', data => {
+		const { onlineUsers } = data;
+		store.dispatch(setOnlineUsers(onlineUsers));
+	});
 };

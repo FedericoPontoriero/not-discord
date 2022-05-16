@@ -17,13 +17,22 @@ const registerSocketServer = server => {
 		authSocket(socket, next);
 	});
 
+	const emitOnlineUsers = () => {
+		const onlineUsers = serverStore.getOnlineUsers();
+		io.emit('onlineUsers', { onlineUsers });
+	};
+
 	io.on('connection', socket => {
 		newConnectionHandler(socket, io);
-
+		emitOnlineUsers();
 		socket.on('disconnect', () => {
 			disconnectHandler(socket);
 		});
 	});
+
+	setInterval(() => {
+		emitOnlineUsers();
+	}, [8000]);
 };
 
 module.exports = {

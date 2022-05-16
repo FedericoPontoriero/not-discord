@@ -3,33 +3,24 @@ import { styled } from '@mui/system';
 import FriendsListItem from './FriendsListItem';
 import { connect } from 'react-redux';
 
-const DUMMY_FRIENDS = [
-	{
-		id: 1,
-		username: 'Mark',
-		isOnline: true,
-	},
-	{
-		id: 2,
-		username: 'Anna',
-		isOnline: true,
-	},
-	{
-		id: 3,
-		username: 'John',
-		isOnline: false,
-	},
-];
-
 const MainContainer = styled('div')({
 	flexGrow: 1,
 	width: '100%',
 });
 
-function FriendsList(friends) {
+const checkOnlineUsers = (friends = [], onlineUsers = []) => {
+	friends.forEach(f => {
+		const isUserOnline = onlineUsers.find(user => user.id === f.id);
+		f.isOnline = isUserOnline ? true : false;
+	});
+
+	return friends;
+};
+
+function FriendsList({ friends, onlineUsers }) {
 	return (
 		<MainContainer>
-			{friends.map(f => (
+			{checkOnlineUsers(friends, onlineUsers).map(f => (
 				<FriendsListItem
 					username={f.username}
 					id={f.id}
