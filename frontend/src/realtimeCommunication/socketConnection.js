@@ -2,15 +2,16 @@ import io from 'socket.io-client';
 import {
 	setPendingFriendsInvitations,
 	setFriends,
+	setOnlineUsers,
 } from '../store/actions/friendsActions';
 import store from '../store/store';
 
 let socket = null;
 
-export const connectWithSoketServer = userDetails => {
+export const connectWithsocketServer = userDetails => {
 	const jwtToken = userDetails.token;
 
-	socket = io('http://localhost:5002', {
+	socket = io('http://localhost:5000', {
 		auth: {
 			token: jwtToken,
 		},

@@ -27,7 +27,7 @@ const Input = styled('input')({
 	padding: '0 5px',
 });
 
-function inputWithLabel(props) {
+function InputWithLabel(props) {
 	const { value, setValue, label, type, placeholder } = props;
 
 	const handleValueChange = event => {
@@ -47,4 +47,4 @@ function inputWithLabel(props) {
 	);
 }
 
-export default inputWithLabel;
+export default InputWithLabel;
