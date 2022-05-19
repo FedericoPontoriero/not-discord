@@ -1,25 +1,26 @@
-const FriendInvitation = require('../../models/friendInvitation');
-const friendsUpdates = require('../../socketHandlers/updates/friends');
+const FriendInvitation = require("../../models/friendInvitation");
+const friendsUpdates = require("../../socketHandlers/updates/friends");
 
 const postReject = async (req, res) => {
-	try {
-		const { id } = req.body;
-		const { userId } = req.user;
+  try {
+    const { id } = req.body;
+    const { userId } = req.user;
 
-		// Remove the invitation from the collection
-		const invitationExists = await FriendInvitation.exists({ _id: id });
+    // remove that invitation from friend invitations collection
+    const invitationExists = await FriendInvitation.exists({ _id: id });
 
-		if (invitationExists) {
-			await FriendInvitation.findByIdAndDelete(id);
-		}
+    if (invitationExists) {
+      await FriendInvitation.findByIdAndDelete(id);
+    }
 
-		// Update the invitations
-		friendsUpdates.updateFriendsPendingInvitations(userId);
+    // update pending invitations
+    friendsUpdates.updateFriendsPendingInvitations(userId);
 
-		return res.status(200).send('Invitation rejected.');
-	} catch (error) {
-		return res.status(500).send('Something went wrong');
-	}
+    return res.status(200).send("Invitation succesfully rejected");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("Something went wrong please try again");
+  }
 };
 
 module.exports = postReject;

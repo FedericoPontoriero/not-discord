@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { getActions } from '../../store/actions/authActions';
 import { useNavigate } from 'react-router-dom';
 
-function LoginPage({ login }) {
+const LoginPage = ({ login }) => {
 	const history = useNavigate();
 
 	const [mail, setMail] = useState('');
@@ -18,6 +18,7 @@ function LoginPage({ login }) {
 	useEffect(() => {
 		setIsFormValid(validateLoginForm({ mail, password }));
 	}, [mail, password, setIsFormValid]);
+
 	const handleLogin = () => {
 		const userDetails = {
 			mail,
@@ -26,6 +27,7 @@ function LoginPage({ login }) {
 
 		login(userDetails, history);
 	};
+
 	return (
 		<AuthBox>
 			<LoginPageHeader />
@@ -38,11 +40,12 @@ function LoginPage({ login }) {
 			<LoginPageFooter isFormValid={isFormValid} handleLogin={handleLogin} />
 		</AuthBox>
 	);
-}
+};
 
 const mapActionsToProps = dispatch => {
 	return {
 		...getActions(dispatch),
 	};
 };
+
 export default connect(null, mapActionsToProps)(LoginPage);

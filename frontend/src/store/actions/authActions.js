@@ -24,6 +24,7 @@ const setUserDetails = userDetails => {
 const login = (userDetails, history) => {
 	return async dispatch => {
 		const response = await api.login(userDetails);
+		console.log(response);
 		if (response.error) {
 			dispatch(openAlertMessage(response?.exception?.response?.data));
 		} else {

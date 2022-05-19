@@ -5,44 +5,41 @@ import { useNavigate } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 
 const getFormNotValidMessage = () => {
-	return 'Enter valid e-mail address and password should contain between 6 and 12 characters';
+	return 'Enter correct e-mail address and password should contains between 6 and 12 characters';
 };
 
 const getFormValidMessage = () => {
-	return 'Press to login in!';
+	return 'Press to log in!';
 };
-function LoginPageFooter({ handleLogin, isFormValid }) {
-	const navigate = useNavigate();
+
+const LoginPageFooter = ({ handleLogin, isFormValid }) => {
+	const history = useNavigate();
 
 	const handlePushToRegisterPage = () => {
-		navigate('/register');
+		history('/register');
 	};
 
 	return (
 		<>
-			<span>
-				<Tooltip
-					title={
-						!isFormValid ? getFormNotValidMessage() : getFormValidMessage()
-					}>
-					<div>
-						<CustomPrimaryButton
-							label='Log in'
-							additionalStyles={{ marginTop: '30px' }}
-							disabled={!isFormValid}
-							onClick={handleLogin}
-						/>
-					</div>
-				</Tooltip>
-			</span>
+			<Tooltip
+				title={!isFormValid ? getFormNotValidMessage() : getFormValidMessage()}>
+				<div>
+					<CustomPrimaryButton
+						label='Log in'
+						additionalStyles={{ marginTop: '30px' }}
+						disabled={!isFormValid}
+						onClick={handleLogin}
+					/>
+				</div>
+			</Tooltip>
 			<RedirectInfo
-				text='Need an acccount? '
+				text='Need an account? '
 				redirectText='Create an account'
 				additionalStyles={{ marginTop: '5px' }}
 				redirectHandler={handlePushToRegisterPage}
 			/>
 		</>
 	);
-}
+};
 
 export default LoginPageFooter;

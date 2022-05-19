@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import LoginPage from './authPages/LoginPage/LoginPage';
 import RegisterPage from './authPages/RegisterPage/RegisterPage';
-import Dashboard from './authPages/Dashboard/Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import AlertNotification from './shared/components/AlertNotification';
 
 function App() {

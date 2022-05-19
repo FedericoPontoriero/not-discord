@@ -8,22 +8,24 @@ import store from '../store/store';
 
 let socket = null;
 
-export const connectWithsocketServer = userDetails => {
+export const connectWithSocketServer = userDetails => {
 	const jwtToken = userDetails.token;
 
 	socket = io('http://localhost:5000', {
 		auth: {
 			token: jwtToken,
 		},
+		forceNew: true,
+		transports: ['websocket'],
 	});
 
 	socket.on('connect', () => {
-		console.log('succesfully connected with socket.io server', socket.id);
+		console.log('succesfully connected with socket.io server');
+		console.log(socket.id);
 	});
 
 	socket.on('friends-invitations', data => {
 		const { pendingInvitations } = data;
-
 		store.dispatch(setPendingFriendsInvitations(pendingInvitations));
 	});
 
