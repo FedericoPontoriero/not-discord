@@ -18,3 +18,10 @@ export const setOpenRoom = (
 		isUserInRoom,
 	};
 };
+
+export const setRoomDetails = roomDetails => {
+	return {
+		type: roomActions.SET_ROOM_DETAILS,
+		roomDetails,
+	};
+};
