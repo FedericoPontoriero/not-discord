@@ -40,3 +40,11 @@ export const joinRoom = roomId => {
 	store.dispatch(setOpenRoom(false, true));
 	socketConnection.joinRoom({ roomId });
 };
+
+export const leaveRoom = () => {
+	const roomId = store.getState().room.roomDetails.roomId;
+
+	socketConnection.leaveRoom({ roomId });
+	store.dispatch(setRoomDetails(null));
+	store.dispatch(setOpenRoom(false, false));
+};

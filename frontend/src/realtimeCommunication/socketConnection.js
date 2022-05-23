@@ -69,3 +69,7 @@ export const createNewRoom = () => {
 export const joinRoom = data => {
 	socket.emit('room-join', data);
 };
+
+export const leaveRoom = data => {
+	socket.emit('room-leave', data);
+};
