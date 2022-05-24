@@ -12,3 +12,5 @@ const roomLeaveHandler = (socket, data) => {
 		roomsUpdates.updateRooms();
 	}
 };
+
+module.exports = roomLeaveHandler;
