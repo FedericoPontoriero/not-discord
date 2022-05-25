@@ -13,6 +13,15 @@ const roomJoinHandler = (socket, data) => {
 
 	serverStore.joinActiveRoom(roomId, participantDetails);
 
+	// Send info to users in room for incoming connections
+	roomDetails.participants.forEach(participant => {
+		if (participant.socketId !== participantDetails.socketId) {
+			socket.to(participant.socketId).emit('conn-prepare', {
+				connUserSocketId: participantDetails.socketId,
+			});
+		}
+	});
+
 	roomsUpdates.updateRooms();
 };
 
