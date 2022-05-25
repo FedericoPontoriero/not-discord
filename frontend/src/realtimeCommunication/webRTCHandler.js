@@ -1,6 +1,7 @@
 import store from '../store/store';
-import { setLocalStream } from '../store/actions/roomActions';
+import { setLocalStream, setRemoteStreams } from '../store/actions/roomActions';
 import Peer from 'simple-peer';
+import * as socketConnection from './socketConnection';
 
 const getConfiguration = () => {
 	const turnIceServers = null;
@@ -72,6 +73,9 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
 	peers[connUserSocketId].on('stream', remoteStream => {
 		// add new remoteStream to server store
 		console.log('remoteStream', remoteStream);
+
+		remoteStream.connUserSocketId = connUserSocketId;
+		addNewRemoteStream(remoteStream);
 	});
 };
 
@@ -81,4 +85,36 @@ export const handleSignalingData = data => {
 	if (peers[connUserSocketId]) {
 		peers[connUserSocketId].signal(signal);
 	}
+};
+
+export const addNewRemoteStream = remoteStream => {
+	const remoteStreams = store.getState().room.remoteStreams;
+	const newRemoteStreams = [...remoteStreams, remoteStream];
+
+	store.dispatch(setRemoteStreams(newRemoteStreams));
+};
+
+export const closeAllConnections = () => {
+	Object.entries(peers).forEach(mappedObject => {
+		const connUserSocketId = mappedObject[0];
+		if (peers[connUserSocketId]) {
+			peers[connUserSocketId].destroy();
+			delete peers[connUserSocketId];
+		}
+	});
+};
+
+export const handleParticipantLeftRoom = data => {
+	const { connUserSocketId } = data;
+
+	if (peers[connUserSocketId]) {
+		peers[connUserSocketId].destroy();
+		delete peers[connUserSocketId];
+	}
+
+	const remoteStreams = store.getState().room.remoteStreams;
+	const newRemoteStreams = remoteStreams.filter(
+		remoteStream => remoteStream.connUserSocketId !== connUserSocketId
+	);
+	store.dispatch(setRemoteStreams(newRemoteStreams));
 };
