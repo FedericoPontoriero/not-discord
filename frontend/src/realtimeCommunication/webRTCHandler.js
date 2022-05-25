@@ -66,10 +66,19 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
 			connUserSocketId: connUserSocketId,
 		};
 
-		// socketConnection.signalPeerData(signalData)
+		socketConnection.signalPeerData(signalData);
 	});
 
 	peers[connUserSocketId].on('stream', remoteStream => {
 		// add new remoteStream to server store
+		console.log('remoteStream', remoteStream);
 	});
+};
+
+export const handleSignalingData = data => {
+	const { connUserSocketId, signal } = data;
+
+	if (peers[connUserSocketId]) {
+		peers[connUserSocketId].signal(signal);
+	}
 };
