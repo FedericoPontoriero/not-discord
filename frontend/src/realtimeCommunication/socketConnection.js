@@ -54,9 +54,14 @@ export const connectWithSocketServer = userDetails => {
 	});
 
 	socket.on('conn-prepare', data => {
-		const { connUserId } = data;
+		const { connUserSocketId } = data;
 		webRTCHandler.prepareNewPeerConnection(data, false);
 		socket.emit('conn-init', { connUserSocketId: connUserSocketId });
+	});
+
+	socket.on('conn-init', data => {
+		const { connUserSocketId } = data;
+		webRTCHandler.prepareNewPeerConnection(connUserSocketId, true);
 	});
 };
 
