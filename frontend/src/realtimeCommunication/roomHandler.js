@@ -4,6 +4,8 @@ import {
 	setActiveRooms,
 	setLocalStream,
 	setRemoteStreams,
+	setScreenSharingStream,
+	setIsUserJoinedWithOnlyAudio,
 } from '../store/actions/roomActions';
 import store from '../store/store';
 import * as socketConnection from './socketConnection';
@@ -12,6 +14,8 @@ import * as webRTCHandler from './webRTCHandler';
 export const createNewRoom = () => {
 	const succesCallbackFunction = () => {
 		store.dispatch(setOpenRoom(true, true));
+		const audioOnly = store.getState().room.audioOnly;
+		store.dispatch(setIsUserJoinedWithOnlyAudio(audioOnly));
 		socketConnection.createNewRoom();
 	};
 
@@ -32,12 +36,20 @@ export const updateActiveRooms = data => {
 
 	const rooms = [];
 
+	const userId = store.getState().auth.userDetails?._id;
+
 	activeRooms.forEach(room => {
-		friends.forEach(f => {
-			if (f.id === room.roomCreator.userId) {
-				rooms.push({ ...room, creatorUsername: f.username });
-			}
-		});
+		const isRoomCreatedByMe = room.roomCreator.userId == userId;
+
+		if (isRoomCreatedByMe) {
+			rooms.push({ ...room, creatorUsername: 'Me' });
+		} else {
+			friends.forEach(f => {
+				if (f.id === room.roomCreator.userId) {
+					rooms.push({ ...room, creatorUsername: f.username });
+				}
+			});
+		}
 	});
 
 	store.dispatch(setActiveRooms(rooms));
@@ -47,6 +59,9 @@ export const joinRoom = roomId => {
 	const succesCallbackFunction = () => {
 		store.dispatch(setRoomDetails({ roomId }));
 		store.dispatch(setOpenRoom(false, true));
+
+		const audioOnly = store.getState().room.audioOnly;
+		store.dispatch(setIsUserJoinedWithOnlyAudio(audioOnly));
 		socketConnection.joinRoom({ roomId });
 	};
 
@@ -61,6 +76,12 @@ export const leaveRoom = () => {
 	if (localStream) {
 		localStream.getTracks().forEach(track => track.stop());
 		store.dispatch(setLocalStream(null));
+	}
+
+	const screenSharingStream = store.getState().room.screenSharingStream;
+	if (screenSharingStream) {
+		screenSharingStream.getTracks().forEach(track => track.stop());
+		store.dispatch(setScreenSharingStream(null));
 	}
 
 	store.dispatch(setRemoteStreams([]));
