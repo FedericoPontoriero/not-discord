@@ -13,7 +13,7 @@ const CameraButton = ({ localStream }) => {
 
 	return (
 		<IconButton onClick={handleToggleCamera} style={{ color: 'white' }}>
-			{videoEnabled ? <VideocamIcon /> : <VideocamOffIcon />}
+			{cameraEnabled ? <VideocamIcon /> : <VideocamOffIcon />}
 		</IconButton>
 	);
 };
