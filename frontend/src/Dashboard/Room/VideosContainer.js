@@ -18,11 +18,12 @@ const VideosContainer = ({
 	return (
 		<MainContainer>
 			<Video
+				muted='muted'
 				stream={screenSharingStream ? screenSharingStream : localStream}
 				isLocalStream
 			/>
 			{remoteStreams.map(stream => (
-				<Video stream={stream} key={stream.id} />
+				<Video muted='muted' stream={stream} key={stream.id} />
 			))}
 		</MainContainer>
 	);
